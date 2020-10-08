@@ -1,0 +1,7 @@
+---
+- name: restart chrony
+  become: yes
+  service:
+    name: chronyd
+    state: restarted
+  when: chronyd_first_start is not changed

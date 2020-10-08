@@ -1,0 +1,59 @@
+---
+- name: NTP Client | Set up NTP client
+  become: yes
+  block:
+    - name: Populate service facts
+      service_facts:
+
+    - name: NTP Client | Check if NTPd is present (for OpenRC)
+      stat:
+        path: /etc/init.d/ntpd
+      register: openrc_ntpd
+      when: ansible_service_mgr == "openrc"
+
+    - name: NTP Client | Install Chrony daemon
+      apk:
+        name: chrony
+        state: latest
+      notify: restart chrony
+
+    - name: NTP Client | Ensure NTPd is down if it exists
+      service:
+        name: ntpd
+        state: stopped
+        enabled: false
+      when: openrc_ntpd.stat.exists is defined or ('ntpd' in services)
+
+    - name: NTP Client | Ensure NTPd is removed
+      apk:
+        name:
+          - openntpd
+          - acf-openntpd
+        state: absent
+
+    - name: NTP Client | Ensure required Chrony dirs exist
+      file:
+        path: "{{ item }}"
+        owner: chrony
+        group: chrony
+        state: directory
+        mode: 0755
+      with_items:
+        - "/etc/chrony"
+        - "/var/lib/chrony"
+
+    - name: NTP Client | Install Chrony config
+      template:
+        src: "chrony.conf"
+        dest: "/etc/chrony/chrony.conf"
+        owner: chrony
+        group: chrony
+        mode: 0644
+      notify: restart chrony
+
+    - name: NTP Client | Ensure Chrony is enabled and started
+      service:
+        name: chronyd
+        state: started
+        enabled: true
+      register: chronyd_first_start
