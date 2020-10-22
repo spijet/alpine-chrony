@@ -1,18 +1,10 @@
 ---
-ntp_defaults:
-  pools:
-    - pool.ntp.org
-    - time.apple.com
-    - time.cloudflare.com
-  hwclock_path: /dev/rtc
-  force_utc: false
-  force_hwclock_control: false
-  rtc_tracking_path: /var/lib/chrony/rtc
-  realtime: true
-
-ntp: |
-  {%- if ntp_vars is defined and ntp_vars is iterable -%}
-  {{ ntp_defaults | combine(ntp_vars, recursive=True) }}
-  {%- else -%}
-  {{ ntp_defaults }}
-  {%- endif -%}
+ntp_pools:
+  - pool.ntp.org
+  - time.apple.com
+  - time.cloudflare.com
+ntp_hwclock_path: /dev/rtc
+ntp_force_utc: false
+ntp_force_hwclock_control: false
+ntp_rtc_tracking_path: /var/lib/chrony/rtc
+ntp_realtime: true

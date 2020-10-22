@@ -10,9 +10,7 @@ NTP Client (chrony) for Ansible, for all your high-precision timekeeping.
 * (Optional) Continuous RTC monitoring and setting, requires exclusive RTC access.
 
 ## Configuration
-All variables of this role are namespaced under the `ntp.*` key. If you want to
-change any parameters (in host/group vars), use `ntp_vars.*` namespace instead,
-as it'll be merged with defaults when defined.
+All variables of this role are namespaced under the `ntp_*` prefix.
 
 Apple and Cloudflare's public NTP servers are quite good and deliver
 high-precision NTP data fast, so they are included in the list.
