@@ -11,6 +11,12 @@
       register: openrc_ntpd
       when: ansible_service_mgr == "openrc"
 
+    - name: NTP Client | Check if OpenNTPd is present (for OpenRC)
+      stat:
+        path: /etc/init.d/openntpd
+      register: openrc_openntpd
+      when: ansible_service_mgr == "openrc"
+
     - name: NTP Client | Install Chrony daemon
       apk:
         name: chrony
@@ -24,11 +30,16 @@
         enabled: false
       when: openrc_ntpd.stat.exists is defined or ('ntpd' in services)
 
+    - name: NTP Client | Ensure OpenNTPd is down if it exists
+      service:
+        name: openntpd
+        state: stopped
+        enabled: false
+      when: openrc_openntpd.stat.exists is defined or ('openntpd' in services)
+
     - name: NTP Client | Ensure NTPd is removed
       apk:
-        name:
-          - openntpd
-          - acf-openntpd
+        name: openntpd
         state: absent
 
     - name: NTP Client | Ensure required Chrony dirs exist
