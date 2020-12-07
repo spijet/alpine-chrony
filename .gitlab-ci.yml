@@ -7,10 +7,12 @@ test:
   image: alpine:3.12.0
   tags:
     - minipig
+  variables:
+    ANSIBLE_CONFIG: "${PWD}/ansible.cfg"
   before_script:
     - apk add -U ansible
     - ansible --version
-    - echo -e '[defaults]\nroles_path = ../' > ansible.cfg
-    - cat ansible.cfg
+    - printf '[defaults]\nroles_path = ../\n' > "${ANSIBLE_CONFIG}"
+    - cat "${ANSIBLE_CONFIG}"
   script:
     - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
