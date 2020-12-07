@@ -67,7 +67,7 @@
         path: /etc/conf.d/chrony
         regexp: '^ARGS="(.*)"$'
         replace: 'ARGS="\1 -x"'
-      when: ntp_dummy_mode is True
+      when: ntp_dummy_mode
 
     - name: NTP Client | Ensure Chrony is enabled and started
       service:
