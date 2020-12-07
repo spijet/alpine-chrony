@@ -5,6 +5,8 @@ galaxy_info:
 
   issue_tracker_url: https://gitlab.com/st-ansible-playground/alpine-chrony/-/issues
 
+  license: MIT
+
   min_ansible_version: 2.1
 
   platforms:
