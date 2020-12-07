@@ -2,4 +2,6 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - alpine-chrony
+    - name: alpine-chrony
+      vars:
+        ntp_dummy_mode: true
