@@ -8,3 +8,4 @@ ntp_force_utc: false
 ntp_force_hwclock_control: false
 ntp_rtc_tracking_path: /var/lib/chrony/rtc
 ntp_realtime: true
+ntp_dummy_mode: false
