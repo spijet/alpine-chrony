@@ -64,7 +64,7 @@
 
     - name: NTP Client | Enable dummy mode if required
       replace:
-        path: /etc/conf.d/chrony
+        path: /etc/conf.d/chronyd
         regexp: '^ARGS="(.*)"$'
         replace: 'ARGS="\1 -x"'
       when: ntp_dummy_mode
