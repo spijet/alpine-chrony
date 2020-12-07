@@ -8,6 +8,6 @@ test:
   tags:
     - minipig
   before_script:
-    - apk install ansible
+    - apk add -U ansible
   script:
     - ansible --version
