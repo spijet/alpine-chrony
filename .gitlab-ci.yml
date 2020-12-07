@@ -4,7 +4,7 @@ stages:
 
 test:
   stage: test
-  image: alpine:3.12.0
+  image: dockage/alpine:3.11-openrc
   tags:
     - minipig
   variables:
@@ -15,3 +15,4 @@ test:
     - printf "[defaults]\nroles_path = $(dirname ${PWD})\n" > "${ANSIBLE_CONFIG}"
   script:
     - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+    - ansible-playbook tests/test.yml -i tests/inventory --connection local
