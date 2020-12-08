@@ -63,10 +63,12 @@
       notify: restart chrony
 
     - name: NTP Client | Enable dummy mode if required
-      replace:
+      lineinfile:
         path: /etc/conf.d/chronyd
-        regexp: '^ARGS="(.*)"$'
-        replace: 'ARGS="\1 -x"'
+        state: present
+        regexp: '^ARGS=\"([^x\"]*)\"$'
+        backrefs: yes
+        line: 'ARGS="-x \1"'
       when: ntp_dummy_mode
 
     - name: NTP Client | Ensure Chrony is enabled and started
