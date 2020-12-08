@@ -21,7 +21,9 @@ test_simple:
 
 test_molecule:
   stage: test
-  image: docker:stable-dind
+  image: docker:stable
+  services:
+    - docker:dind-rootless
   tags:
     - minipig
   before_script:
