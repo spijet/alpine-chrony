@@ -27,8 +27,9 @@ test_molecule:
   tags:
     - minipig
   before_script:
-    - apk add -U ansible py3-pip
-    - pip install molecule molecule-docker
+    - apk add -U ansible py3-pip docker-py
+    - python3 -m pip install molecule[docker]
     - ansible --version
+    - molecule --version
   script:
     - molecule test
