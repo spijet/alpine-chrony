@@ -2,7 +2,7 @@
 stages:
   - test
 
-test:
+test_simple:
   stage: test
   image: dockage/alpine:3.11-openrc
   tags:
@@ -18,3 +18,17 @@ test:
   script:
     - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
     - ansible-playbook tests/test.yml -i tests/inventory --connection local
+
+test_molecule:
+  stage: test
+  image: alpine:3.12.0
+  services:
+    - docker:dind
+  tags:
+    - minipig
+  before_script:
+    - apk add -U ansible py3-pip
+    - pip install molecule molecule-docker
+    - ansible --version
+  script:
+    - molecule test
