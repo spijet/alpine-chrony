@@ -22,8 +22,6 @@ test_simple:
 test_molecule:
   stage: test
   image: docker:stable
-  services:
-    - docker:dind
   tags:
     - minipig
   before_script:
@@ -33,4 +31,4 @@ test_molecule:
     - molecule --version
     - docker info
   script:
-    - molecule test
+    - molecule test --driver-name=docker --destroy=always
