@@ -1,4 +1,7 @@
 # Chrony NTP Client Ansible role
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/spijet/ansible-chrony/blob/master/LICENSE)
+[![GitLab issues](https://img.shields.io/gitlab/issues/st-ansible-playground/alpine-chrony.svg)](https://gitlab.com/st-ansible-playground/alpine-chrony/-/issues)
+[![GitLab pipeline](https://gitlab.com/st-ansible-playground/alpine-chrony/badges/master/pipeline.svg)](https://gitlab.com/st-ansible-playground/alpine-chrony/-/pipelines)
 
 ## Description
 NTP Client (chrony) for Ansible, for all your high-precision timekeeping.
