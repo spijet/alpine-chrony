@@ -1,0 +1,22 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: "Ensure Ansible-friendly environment is there"
+      raw: "/usr/bin/test -e /usr/bin/python3 || /sbin/apk -U add python3"
+    - name: "Gather facts"
+      setup:
+    - name: "Ensure OpenRC works"
+      block:
+        - name: "Ensure OpenRC runtime dir exists"
+          file:
+            path: /run/openrc
+            state: directory
+        - name: "Set up the softlevel file for OpenRC"
+          file:
+            path: /run/openrc/softlevel
+            state: touch
+        - name: "Poke OpenRC to activate it"
+          command: rc-status -a

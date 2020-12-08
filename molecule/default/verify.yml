@@ -1,0 +1,22 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+  - name: Install PSUtil module
+    apk:
+      name: py3-psutil
+      state: present
+  - name: Check if Chrony daemon is installed to the filesystem
+    stat:
+      path: /usr/sbin/chronyd
+    register: chronyd_file
+  - name: Check if chronyd exists
+    assert:
+      that: chronyd_file.stat.exists
+  - name: Check if Chrony daemon is running
+    pids:
+      name: chronyd
+    register: chronyd_pids
+  - name: Check chronyd pids
+    assert:
+      that: chronyd_pids.pids | length > 0

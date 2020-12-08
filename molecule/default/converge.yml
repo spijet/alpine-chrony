@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - name: "alpine-chrony"
+      vars:
+        ntp_dummy_mode: true
