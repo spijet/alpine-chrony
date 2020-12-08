@@ -31,5 +31,6 @@ test_molecule:
     - python3 -m pip install molecule[docker]
     - ansible --version
     - molecule --version
+    - docker info
   script:
     - molecule test
