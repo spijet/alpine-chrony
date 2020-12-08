@@ -21,7 +21,7 @@ test_simple:
 
 test_molecule:
   stage: test
-  image: docker:stable
+  image: docker:stable-dind
   tags:
     - minipig
   before_script:
