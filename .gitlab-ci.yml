@@ -22,6 +22,8 @@ test_simple:
 test_molecule:
   stage: test
   image: docker:stable
+  variables:
+    DOCKER_HOST: unix:///var/run/docker.sock
   tags:
     - minipig
   before_script:
