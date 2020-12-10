@@ -24,8 +24,6 @@ test_molecule:
   image: docker:stable
   tags:
     - minipig
-  variables:
-    DOCKER_HOST: "tcp://ghetto:2375"
   before_script:
     - apk add -U ansible py3-pip docker-py
     - python3 -m pip install molecule[docker]
