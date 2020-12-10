@@ -30,7 +30,7 @@ molecule:
     - ansible --version
     - molecule --version
     - id
-    - ls -la /var/run
+    - ls -la /var/run/
     - docker info
   script:
     - molecule test --driver-name=docker --destroy=always
