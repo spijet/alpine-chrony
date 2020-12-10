@@ -29,6 +29,8 @@ molecule:
     - python3 -m pip install molecule[docker]
     - ansible --version
     - molecule --version
+    - id
+    - ls -la /var/run
     - docker info
   script:
     - molecule test --driver-name=docker --destroy=always
